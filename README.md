@@ -26,10 +26,11 @@ This tool monitors the size of a directory (default: `/data`) and automatically 
 # Clone the repository
 git clone https://github.com/yourusername/zeek-monitor.git
 cd zeek-monitor
+```
+edit zeek-monitor.service with your desired settings
 
 # Run the installation script as root
 sudo ./install.sh
-```
 
 ## Manual Setup
 

@@ -35,7 +35,7 @@ fi
 # Variables
 SCRIPT_PATH=/usr/local/bin/zeek_monitor.py
 SERVICE_PATH=/etc/systemd/system/zeek-monitor.service
-LOG_PATH=/var/log/zeek-monitor.log
+
 
 # Prompt for the username that has Miniconda installed
 read -p "Enter the username who has Miniconda installed in their home directory: " MINICONDA_USER
@@ -78,9 +78,6 @@ echo "Installing systemd service to $SERVICE_PATH..."
 cp "$TMP_SERVICE" "$SERVICE_PATH"
 rm "$TMP_SERVICE"
 
-# Create log file if it doesn't exist
-touch "$LOG_PATH"
-chmod 644 "$LOG_PATH"
 
 # Install required Python packages using Miniconda Python
 echo "Installing required Python packages using Miniconda..."
@@ -114,11 +111,13 @@ echo "=== Installation Summary ==="
 echo "Script installed at: $SCRIPT_PATH"
 echo "Service installed at: $SERVICE_PATH"
 echo "Using Python from: $PYTHON_PATH"
-echo "Log file: $LOG_PATH"
 echo ""
 echo "Service status: $(systemctl is-active zeek-monitor.service)"
 echo ""
-echo "To check the logs, run: tail -f $LOG_PATH"
+echo "To check the logs, run: journalctl -u zeek-monitor.service"
+echo "To stop the service, run: systemctl stop zeek-monitor.service"
+echo "To start the service, run: systemctl start zeek-monitor.service"
+echo "To restart the service, run: systemctl restart zeek-monitor.service"
 echo "To check service status, run: systemctl status zeek-monitor.service"
 echo "To view service configuration, run: systemctl cat zeek-monitor.service"
 echo ""

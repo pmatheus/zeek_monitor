@@ -12,8 +12,8 @@ ExecStart=/home/user/miniconda3/bin/python /usr/local/bin/zeek_monitor.py 3.5TB 
 Environment="PATH=/home/user/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/zeek/bin"
 Restart=on-failure
 RestartSec=5
-StandardOutput=append:/var/log/zeek-monitor.log
-StandardError=append:/var/log/zeek-monitor.log
+StandardOutput=journal+console
+StandardError=journal+console
 
 [Install]
 WantedBy=multi-user.target
