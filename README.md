@@ -27,7 +27,7 @@ This tool monitors the size of a directory (where zeek is saving data) and autom
 git clone https://github.com/yourusername/zeek-monitor.git
 cd zeek-monitor
 ```
-edit zeek-monitor.service with your desired settings
+Edit zeek-monitor.service with your desired settings
 
 ### Run the installation script as root
 ```bash
