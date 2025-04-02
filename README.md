@@ -1,10 +1,10 @@
 # Zeek Monitor
 
-A monitoring solution that automatically stops Zeek network traffic capture when a folder reaches a specified size limit or at a scheduled time.
+A monitoring solution that automatically stops Zeek network traffic capture when the data folder reaches a specified size limit or at a scheduled time.
 
 ## Overview
 
-This tool monitors the size of a directory (default: `/data`) and automatically stops Zeek traffic capture using `zeekctl stop` when the directory size exceeds a specified limit or when a scheduled end time is reached.
+This tool monitors the size of a directory (where zeek is saving data) and automatically stops Zeek traffic capture using `zeekctl stop` when the directory size exceeds a specified limit or when a scheduled end time is reached.
 
 ## Repository Contents
 
@@ -63,16 +63,10 @@ If you prefer to install manually:
 
 ## Configuration
 
-To change the monitoring settings, edit the systemd service file:
-
-```bash
-sudo nano /etc/systemd/system/zeek-monitor.service
-```
-
-In the `ExecStart` line, modify the parameters:
+In the `ExecStart` line of zeek-monitor.service, modify the parameters:
 
 ```
-ExecStart=/usr/local/bin/zeek_monitor.py 2GB --folder /data --interval 60
+ExecStart=/usr/local/bin/zeek_monitor.py 3.5TB --folder /data --interval 60
 ```
 
 Parameters:
@@ -83,11 +77,6 @@ Parameters:
 
 After making changes, reload and restart the service:
 
-```bash
-sudo systemctl daemon-reload
-sudo systemctl restart zeek-monitor.service
-```
-
 ## Running Manually
 
 You can also run the script manually without installing as a service:
@@ -95,9 +84,6 @@ You can also run the script manually without installing as a service:
 ```bash
 # Python script:
 sudo python3 zeek_monitor.py 2GB --folder /data --interval 60 --end-time 2025-04-10T15:30
-
-# OR Bash script:
-sudo ./zeek_monitor.sh 2GB --folder /data --interval 60 --end-time 2025-04-10T15:30
 ```
 
 ## Monitoring and Troubleshooting
@@ -109,7 +95,7 @@ sudo systemctl status zeek-monitor.service
 
 View logs:
 ```bash
-sudo tail -f /var/log/zeek-monitor.log
+sudo journalctl -u zeek-monitor.service
 ```
 
 ## License
