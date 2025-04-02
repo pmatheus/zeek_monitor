@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# This script can be run with Miniconda Python
 
 import os
 import sys
@@ -51,8 +52,20 @@ def parse_datetime(datetime_str):
 def stop_zeek():
     """Stop Zeek network capture using zeekctl stop with sudo."""
     try:
-        # Check if script is running as root
-        if os.geteuid() == 0:
+        # Check if running on Windows
+        if sys.platform == 'win32':
+            print(f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - Running on Windows, zeekctl is not supported")
+            return False
+        
+        # Check if script is running as root on Unix/Linux
+        is_root = False
+        try:
+            is_root = os.geteuid() == 0
+        except AttributeError:
+            # os.geteuid() not available, assuming not root
+            is_root = False
+            
+        if is_root:
             # Running as root, execute directly
             subprocess.run(['zeekctl', 'stop'], check=True)
         else:

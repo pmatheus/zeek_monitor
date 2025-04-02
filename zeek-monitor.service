@@ -5,10 +5,11 @@ After=network.target
 [Service]
 Type=simple
 User=root
-ExecStart=/usr/local/bin/zeek_monitor.py 3.5TB --folder /data --interval 60
+ExecStart=/home/user/miniconda3/bin/python /usr/local/bin/zeek_monitor.py 3.5TB --folder /data --interval 60
 # Replace the above parameters with your desired values
-# Format: ExecStart=/usr/local/bin/zeek_monitor.py SIZE_LIMIT [--end-time END_TIME] [--folder FOLDER_PATH] [--interval CHECK_INTERVAL]
+# Format: ExecStart=/home/USERNAME/miniconda3/bin/python /usr/local/bin/zeek_monitor.py SIZE_LIMIT [--end-time END_TIME] [--folder FOLDER_PATH] [--interval CHECK_INTERVAL]
 
+Environment="PATH=/home/user/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/zeek/bin"
 Restart=on-failure
 RestartSec=5
 StandardOutput=append:/var/log/zeek-monitor.log

@@ -16,7 +16,7 @@ This tool monitors the size of a directory (default: `/data`) and automatically 
 ## Requirements
 
 - Ubuntu 24.04 (may work on other distributions)
-- Python 3
+- Miniconda installed in the user's home directory
 - Zeek installed with `zeekctl` available
 - Root privileges for installation and execution
 
