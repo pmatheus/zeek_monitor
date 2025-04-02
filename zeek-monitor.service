@@ -1,0 +1,18 @@
+[Unit]
+Description=Zeek Folder Size Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/zeek_monitor.py 3.5TB --folder /data --interval 60
+# Replace the above parameters with your desired values
+# Format: ExecStart=/usr/local/bin/zeek_monitor.py SIZE_LIMIT [--end-time END_TIME] [--folder FOLDER_PATH] [--interval CHECK_INTERVAL]
+
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:/var/log/zeek-monitor.log
+StandardError=append:/var/log/zeek-monitor.log
+
+[Install]
+WantedBy=multi-user.target
