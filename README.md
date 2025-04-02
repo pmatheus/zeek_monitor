@@ -29,7 +29,7 @@ cd zeek-monitor
 ```
 edit zeek-monitor.service with your desired settings
 
-# Run the installation script as root
+### Run the installation script as root
 ```bash
 sudo ./install.sh
 ```
